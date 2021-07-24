@@ -1,7 +1,7 @@
 let startButton = document.getElementById("start-button")
 let inflateButton = document.getElementById("inflate-button")
 
-
+// #region GAME LOGIC AND DATA
 
 let clickCount = 0
 let height = 120
@@ -89,4 +89,13 @@ function stopGame(){
 
    stopClock()
    draw()
+}
+
+// #endregion
+
+let players = []
+
+function setPlayer(event){
+event.preventDefault()
+console.log(event)
 }
