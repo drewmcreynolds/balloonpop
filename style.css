@@ -9,7 +9,20 @@ body{
   border-radius: 50%;
 }
 
+
+.card{
+  background-color: white;
+  padding: 1em;
+  box-shadow: 2px 0 8px rgba(0,0,0,.3);
+}
+
+
+
+
+
+
+
 .hidden{
-  display: none;
+  display: none !important;
 
 }
