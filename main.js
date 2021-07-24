@@ -13,6 +13,7 @@ let currentPopCount = 0
 let gameLength = 5000
 let clockId = 0
 let timeRemaining = 0
+let currentPlayer = {}
 
 function startGame(){
 
@@ -63,26 +64,28 @@ function draw(){
   let clickCountElem = document.getElementById("click-count")
   let popCountElem = document.getElementById("pop-count")
   let highPopCountElem = document.getElementById("high-pop-count")
+
   balloonElement.style.height = height + "px"
   balloonElement.style.width = width + "px"
   
   clickCountElem.innerText = clickCount.toString()
   popCountElem.innerText = currentPopCount.toString()
-  highPopCountElem.innerText = highestPopCount.toString()
+  highPopCountElem.innerText = currentPlayer.topScore.toString()
 }
 
 function stopGame(){
   console.log("the game is over")
 
-  inflateButton.setAttribute("disabled", "true")
+   inflateButton.setAttribute("disabled", "true")
    startButton.removeAttribute("disabled")
    
    clickCount = 0
    height = 120
    width = 100
 
-   if(currentPopCount > highestPopCount){ 
-     highestPopCount = currentPopCount
+   if(currentPopCount > currentPlayer.topScore){ 
+     currentPlayer.topScore = currentPopCount
+     savePlayers()
    }
 
    currentPopCount = 0
@@ -94,8 +97,39 @@ function stopGame(){
 // #endregion
 
 let players = []
+loadPlayers()
+
 
 function setPlayer(event){
 event.preventDefault()
-console.log(event)
+
+let form = event.target
+
+let playerName = form.playerName.value
+
+currentPlayer = players.find(player => player.name == playerName)
+
+if(!currentPlayer){
+  currentPlayer = {name: playerName, topScore: 0 }
+  players.push(currentPlayer)
+  savePlayers()
 }
+
+form.reset()
+document.getElementById("game").classList.remove("hidden")
+form.classList.add("hidden")
+draw()
+
+}
+
+function savePlayers(){ 
+  window.localStorage.setItem("players", JSON.stringify(players))
+}
+function loadPlayers(){
+  let playersData = JSON.parse(window.localStorage.getItem("players"))
+  if(playersData){
+    players = playersData
+    }
+
+  }
+
