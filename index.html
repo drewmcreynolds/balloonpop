@@ -32,9 +32,8 @@
   <button type="submit">Ok</button>
 </form>
 
-<!-- TODO replace hidden class -->
 
-<section id="game" class="game ">
+<section id="game" class="game hidden">
 
 <div class="card bg-dark text-light">
   <div class="d-flex space-between">
@@ -53,12 +52,8 @@
     <button class="btn-dark"onclick="changePlayer()">Change Player</button>
     <button id="start-button" onclick="startGame()"> START GAME</button>
   </div>
-    
+
   <div id="game-controls" class="hidden">    
-    <button id="inflate-button" onclick="inflate()">
-      Inflate
-      <span id="click-count"></span>
-    </button>
     
     <div>    
       <span>Balloon Popped:</span>
@@ -69,11 +64,30 @@
       <span> Time Remaining:</span>
       <span id="countdown">0</span>
     </div>
-    
-    <div id="balloon" class="balloon"></div>
+    <div class=" game-container d-flex">
+     <div class="pump" onclick="inflate()">
+       <div class="handle"></div>
+       <div class="pump-box">
+        <span id="click-count"></span>
+       </div>
+     </div>
+      <div id="balloon" class="balloon"></div>
+      <audio id="pop-sound" src="burst.mp3"></audio>
+    </div> 
+
+
+
+
    </div>
  </section>
 </main>
+
+
+  <div id="scoreboard" class=" container card mt-2">
+    <h3 class="text-center">Scoreboard</h3>
+    <div id="players"></div>  
+  </div>
+
   
   
   <script src="main.js"></script>
